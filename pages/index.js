@@ -4,6 +4,7 @@ import Widget from '../src/components/Widget';
 import QuizBackground from '../src/components/QuizBackground';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
+import QuizLogo from '../src/components/QuizLogo';
 import db from '../db.json';
 
 export const QuizContainer = styled.div`
@@ -21,12 +22,22 @@ export default function Home() {
   return (
     <QuizBackground backgroundImage={db.bg}  >
       <QuizContainer>
+        <QuizLogo />
         <Widget>
           <Widget.Header>
-            Texto
+            Teste os seus conhecimentos
           </Widget.Header>
           <Widget.Content>
             Mais texto
+          </Widget.Content>
+        </Widget>
+
+        <Widget>
+          <Widget.Header>
+            Quizes da galera
+          </Widget.Header>
+          <Widget.Content>
+            Da uma olhada aqui
           </Widget.Content>
         </Widget>
         <Footer />
