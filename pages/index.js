@@ -1,4 +1,6 @@
-import styled from 'styled-components'
+import React, { useState, FormEvent } from 'react';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 import Widget from '../src/components/Widget';
 import QuizBackground from '../src/components/QuizBackground';
@@ -19,8 +21,16 @@ export const QuizContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+
+  function submitForm(event) {
+    event.preventDefault();
+    router.push(`/quiz?name=${name}`);
+  }
+
   return (
-    <QuizBackground backgroundImage={db.bg}  >
+    <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         <QuizLogo />
         <Widget>
@@ -28,7 +38,16 @@ export default function Home() {
             Teste os seus conhecimentos
           </Widget.Header>
           <Widget.Content>
-            Mais texto
+            <form onSubmit={submitForm}>
+              <input
+                placeholder="Digite o seu nome"
+                onChange={(event) => setName(event.target.value)}
+              />
+              <button type="submit" disabled={name.length === 0}>
+                Jogar
+                {name}
+              </button>
+            </form>
           </Widget.Content>
         </Widget>
 
@@ -45,5 +64,5 @@ export default function Home() {
       <GitHubCorner projectUrl="https://github.com/nettoveloso" />
 
     </QuizBackground>
-  )
+  );
 }
